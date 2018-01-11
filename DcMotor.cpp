@@ -1,6 +1,6 @@
 #include "DcMotor.h"
 
-DcMotor::DcMotor(uint8_t directionPin, uint8_t speedPin){
+void DcMotor::begin(uint8_t directionPin, uint8_t speedPin){
 
 	_directionPin = directionPin;
 	_speedPin = speedPin;
@@ -41,7 +41,7 @@ void DcMotor::move(uint8_t direction, uint8_t speed){
 	}		
 }
 
-void DcMotor::move(uint8_t speed){
+void DcMotor::move(int16_t speed){
 	
 	if (speed == 0){
 		stop();

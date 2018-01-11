@@ -9,12 +9,12 @@
 class DcMotor
 {
 	public:
-		DcMotor(uint8_t directionPin, uint8_t speedPin);
+		void begin(uint8_t directionPin, uint8_t speedPin);
 		void stop();
 		void goForward();
 		void goBackward();
 		void move(uint8_t direction, uint8_t speed);		
-		void move(uint8_t speed);
+		void move(int16_t speed);
 	
 	private:
 		uint8_t _directionPin;
