@@ -1,9 +1,10 @@
 #include <DcMotor.h>
 
-DcMotor myMotor(6, 7);
+DcMotor myMotor;
 
 void setup() {
-
+	
+	myMotor.begin(6, 7);
 }
 
 void loop() {
