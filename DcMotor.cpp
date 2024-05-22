@@ -56,26 +56,33 @@ void DcMotor::goBackward(){
 
 void DcMotor::move(uint8_t direction, uint8_t speed){
 	
-	if (((direction == FORWARD) && (_polarity == DIRECT)) || ((direction == BACKWARD) && (_polarity == INVERSE))){
-		digitalWrite(_directionPin, LOW);
-		analogWrite(_speedPin, speed);
-	}
-	else{
-		digitalWrite(_directionPin, HIGH);
-		analogWrite(_speedPin, 255 - speed);
-	}		
+	if (direction == FORWARD)
+		move(speed);
+	else
+		move (-speed);
 }
 
 void DcMotor::move(int16_t speed){
 	
 	if (speed == 0){
 		stop();
-	} else if (((speed > 0) && (_polarity == DIRECT)) || ((speed < 0) && (_polarity == INVERSE))){
-		digitalWrite(_directionPin, LOW);
-		analogWrite(_speedPin, speed);
+	} 
+	else if (speed > 0){
+		if (_polarity == DIRECT) {
+			digitalWrite(_directionPin, LOW);
+			analogWrite(_speedPin, speed);
+		}
+		else{
+			digitalWrite(_directionPin, HIGH);
+			analogWrite(_speedPin, 255 - speed);
+		}
 	}
-	else{
-		digitalWrite(_directionPin, HIGH);
-		analogWrite(_speedPin, 255 - speed);
-	}		
+	else if (_polarity == DIRECT) {
+			digitalWrite(_directionPin, HIGH);
+			analogWrite(_speedPin, speed);
+		}
+		else{
+			digitalWrite(_directionPin, LOW);
+			analogWrite(_speedPin, 255 - speed);
+		}		
 }
